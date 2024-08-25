@@ -77,7 +77,7 @@ bool Container::tryParseData(const string& fileName)
 		vector<string> tokens = split(line, ',');
 
 
-		// iterate over the line
+		// node validation and creation
 		if (tokens[0] == "node")
 		{
 			if (tokens.size() != 2)
@@ -95,6 +95,7 @@ bool Container::tryParseData(const string& fileName)
 			cout << "added node " << nodeName << endl;
 
 		}
+		//edge validation and creation
 		else if (tokens[0] == "edge")
 		{
 			if (tokens.size() != 4)
@@ -130,13 +131,15 @@ bool Container::tryParseData(const string& fileName)
 
 			int weight = stoi(tokens[3]);
 
-
+			// add edge to nodes
 			_nodes[from]->neighbors.push_back({ _nodes[to],weight });
+			_nodes[to]->neighbors.push_back({ _nodes[from],weight });
 
 			cout << "added edge from " << from << " to " << to << " with a weight of " << weight << endl;
 
 
 		}
+		// nodes to find path between
 		else if (tokens[0] == "find")
 		{
 			if (tokens.size() != 3)
@@ -167,7 +170,7 @@ bool Container::tryParseData(const string& fileName)
 		}
 		else
 		{
-			// key is not valide
+			// first token is not valide
 			cout << "line " << lineNum << ": first key is not valid" << endl;
 			return false;
 		}
