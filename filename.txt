@@ -1,0 +1,17 @@
+node,a
+node,b
+node,c
+node,d
+node,e
+node,f
+node,g
+edge,a,c,3
+edge,c,b,5
+edge,b,d,21
+edge,c,d,18
+edge,f,a,2
+edge,g,c,9
+edge,b,f,13
+edge,c,f,4
+find,a,f
+find,c,a
