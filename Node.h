@@ -8,9 +8,13 @@ class Node
 {
 public:
 	string id;
-	vector<pair<Node*, int>> neighbors;
+	vector<pair<Node*, double>> neighbors;
 
 	Node(string id) : id(id){}
 	void print() const;
+
+	bool operator!=(const Node& other) const {
+		return id != other.id;
+	}
 };
 

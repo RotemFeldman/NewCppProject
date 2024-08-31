@@ -7,6 +7,7 @@ void Dijkstra::search(const vector<Node*>& nodes, const string& startId, const s
 {
     unordered_map<string, double> distances;
     unordered_map<string, Node*> previous;
+    vector<string> visited;
 
     Node* startNode = nullptr;
     Node* endNode = nullptr;
@@ -37,6 +38,7 @@ void Dijkstra::search(const vector<Node*>& nodes, const string& startId, const s
     
     while (!pq.empty()) {
         Node* current = pq.top().node;
+        visited.push_back(current->id);
         pq.pop();
 
         if (current->id == endId) {
@@ -51,7 +53,12 @@ void Dijkstra::search(const vector<Node*>& nodes, const string& startId, const s
             if (altDist < distances[neighborNode->id]) {
                 distances[neighborNode->id] = altDist;
                 previous[neighborNode->id] = current;
-                pq.push({ neighborNode, altDist });
+
+                // add to queue if unvisited
+                if (find(visited.begin(), visited.end(), neighborNode->id) == visited.end())
+                {
+                    pq.push({ neighborNode, altDist });
+                }
             }
         }
     }

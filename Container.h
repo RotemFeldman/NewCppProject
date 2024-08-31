@@ -22,6 +22,7 @@ private:
 
 	vector<string> split(const string& s, char delimiter);
 	bool isInteger(const string& str);
+	bool isDouble(const string& str);
 	bool tryParseData(const string& filename);
 
 };

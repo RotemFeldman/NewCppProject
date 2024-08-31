@@ -5,6 +5,7 @@
 #include <set>
 #include <sstream>
 #include "Dijkstra.h"
+#include <stdexcept>
 
 void Container::getAndParseAndShowData(const string& fileName)
 {
@@ -55,6 +56,28 @@ bool Container::isInteger(const string& str)
 	// Check if the remaining characters are digits
 	return std::all_of(str.begin() + start, str.end(), ::isdigit);
 }
+
+bool Container::isDouble(const string& str)
+{
+	try 
+	{
+		size_t pos;
+		stod(str, &pos);
+
+		// Check if the entire string was parsed
+		return pos == str.length();
+	}
+	catch (const invalid_argument& e)
+	{
+		return false;
+	}
+	catch (const out_of_range& e) 
+	{
+		return false;
+	}
+}
+
+
 
 bool Container::tryParseData(const string& fileName)
 {
@@ -121,15 +144,16 @@ bool Container::tryParseData(const string& fileName)
 				return false;
 			}
 
-			//check if int
-			if (!isInteger(tokens[3]))
+
+			//check if double
+			if (!isDouble(tokens[3]))
 			{
-				cout << "line " << lineNum << ": weight value must be an integer. the writen value is: " << tokens[3] << endl;
+				cout << "line " << lineNum << ": weight value must be an numeric. the writen value is: " << tokens[3] << endl;
 				return false;
 			}
 
 
-			int weight = stoi(tokens[3]);
+			double weight = stod(tokens[3]);
 
 			// add edge to nodes
 			_nodes[from]->neighbors.push_back({ _nodes[to],weight });

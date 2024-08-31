@@ -5,12 +5,12 @@ node,d
 node,e
 node,f
 node,g
-edge,a,c,3
-edge,c,b,5
+edge,a,c,3.1
+edge,c,b,0.22673
 edge,b,d,21
-edge,c,d,18
+edge,c,d,18.422
 edge,f,a,2
-edge,g,c,9
+edge,g,c,9.3
 edge,b,f,13
 edge,c,f,4
 find,a,f
